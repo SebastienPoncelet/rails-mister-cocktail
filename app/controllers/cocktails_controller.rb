@@ -1,9 +1,10 @@
 class CocktailsController < ApplicationController
-  def index(page_idx = 0)
-
+  def index
     per_page = 12
-
-    @cocktails = Cocktail.limit(per_page).offset(per_page * page_idx)
+    @max_page_idx = (Cocktail.count.to_f / per_page).floor
+    @page_idx = params[:page] ? params[:page].to_i - 1 : 0
+    @page_human = @page_idx + 1
+    @cocktails = Cocktail.limit(per_page).offset(per_page * @page_idx)
   end
 
   def show

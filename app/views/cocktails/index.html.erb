@@ -1,4 +1,4 @@
-<h1>All Cocktails</h1>
+<h1>Cocktails</h1>
 
 <p id="notice"><%= notice %></p>
 
@@ -40,3 +40,37 @@
 
 <br>
 
+<% rng = ((@page_idx - 1)..(@page_idx + 1)).to_a.reject { |n| n < 0 || n >= @max_page_idx } %>
+
+<% prev_exists = @page_idx >= 0 %>
+<% next_exists = @page_idx <= @max_page_idx %>
+
+<% prev_classes = %w[page-link] %>
+<% next_classes = %w[page-link] %>
+
+<% prev_classes << 'disabled' if !prev_exists %>
+<% next_classes << 'disabled' if !next_exists %>
+
+<% prev_classes_joined = prev_classes.join(' ') %>
+<% next_classes_joined = next_classes.join(' ') %>
+
+<nav aria-label="pagination">
+  <ul class="pagination">
+
+    <li>
+      <%= link_to '«', cocktails_path(page: + 1), class: prev_classes_joined %>
+    </li>
+
+    <% rng.each do |n| %>
+      <li>
+        <%= link_to "#{n + 1}", cocktails_path(page: n + 1), class: 'page-link' %>
+      </li>
+    <% end %>
+
+    <li>
+      <%= link_to '»', cocktails_path(page: @max_page_idx), class: next_classes_joined %>
+    </li>
+
+
+  </ul>
+</nav>
