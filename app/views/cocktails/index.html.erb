@@ -9,7 +9,7 @@
       <th>Name</th>
     </tr>
 
-    <% @cocktails.each do |cocktail|%>
+    <% @cocktails.sort.each do |cocktail|%>
       <tr>
         <td><%= cocktail.id%></td>
         <td><%= link_to "#{cocktail.name}", cocktail_path(cocktail)%></td>

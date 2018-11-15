@@ -14,38 +14,40 @@
     <tr>
       <td><%= @cocktail.id%></td>
       <td><%= @cocktail.name%></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <% @cocktail.doses.each do |dose|%>
+      <% @dose = dose %>
+      <td>
+        <ul>
+          <li><%= Ingredient.find(dose.ingredient_id).name %></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><%= dose.qty %></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><%= dose.qty_unit %></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><%= link_to "Delete", cocktail_dose_path(@dose), method: :delete %></li>
+        </ul>
+      </td>
+
+
+        <% end %>
     </tr>
   </tbody>
 </table>
 
 <p></p>
-
-<table>
-  <tbody>
-    <tr>
-      <th>Rating</th>
-      <th>Content</th>
-    </tr>
-
-
-      <tr>
-        <td></td>
-        <td></td>
-      </tr>
-
-  </tbody>
-
-</table>
-
 <p></p>
 <p></p>
 <p></p>
 
 <%= link_to "ADD DOSE", new_cocktail_dose_path(@cocktail), class: "btn" %>
-
 <%= link_to "Cocktails list", cocktails_path, class: "btn btn-primary" %>
 
