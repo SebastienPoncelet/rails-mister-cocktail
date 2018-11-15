@@ -1,27 +1,30 @@
-require 'json'
-require 'open-uri'
-
 puts 'deleting cocktails and doses...'
 Dose.delete_all
 Cocktail.delete_all
 
-puts 'fetching cocktail data...'
-url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail'
+# require 'pry-byebug'
 
-cocktails_serialized = open(url).read
+# puts 'fetching cocktail data...'
+# url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail'
+
+# cocktails_serialized = open(url).read
+# data = JSON.parse(cocktails_serialized)
+# drinks = data['drinks']
+
+cocktails_serialized = File.read(File.join(File.dirname(__FILE__), 'seed_data/cocktails_doses.json'))
+
 data = JSON.parse(cocktails_serialized)
-drinks = data['drinks']
+
+drinks = data
 
 puts 'creating cocktails...'
-drinks.each do |drink|
+drinks.each do |drink_outer|
 
-  thecocktaildb_id = drink['idDrink']
 
-  drink_url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=#{thecocktaildb_id}"
-  s = open(drink_url).read
-  d = JSON.parse(s)
+  drink = drink_outer['drinks'][0]
 
-  drink = d['drinks'][0]
+  # debugger
+
 
   c = Cocktail.new(name: drink["strDrink"], pic: drink["strDrinkThumb"], description: drink['strInstructions'])
 
