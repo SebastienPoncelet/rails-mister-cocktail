@@ -1,2 +1,10 @@
-<h1>Cocktails#edit</h1>
-<p>Find me in app/views/cocktails/edit.html.erb</p>
+<h1>EDIT COCKTAIL PAGE</h1>
+
+<h3>Enter information in the form below:</h3>
+
+<%= simple_form_for(@cocktail) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+<% end %>

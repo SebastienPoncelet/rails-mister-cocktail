@@ -13,6 +13,8 @@
       <tr>
         <td><%= cocktail.id%></td>
         <td><%= link_to "#{cocktail.name}", cocktail_path(cocktail)%></td>
+        <td><%= link_to "Edit", edit_cocktail_path(cocktail)%></td>
+        <td><%= link_to "Delete", cocktail_path(cocktail.id), method: :delete%></td>
       </tr>
     <% end %>
   </tbody>
