@@ -29,6 +29,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Gems added to setup your Rails app for Frontend
+# Each developer needs to bundle install them fist then in the terminal
+# terminal: rails generate simple_form:install --bootstrap
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'font-awesome-sass', '~> 5.0.9'
+gem 'simple_form'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
