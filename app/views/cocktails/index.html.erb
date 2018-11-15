@@ -2,21 +2,27 @@
 
 <p id="notice"><%= notice %></p>
 
-
 <div class='row'>
 
   <% @cocktails.each do |cocktail| %>
+
+      <% desc = cocktail.description %>
+      <% desc_truncate_length = 70 %>
+      <% desc_truncated = desc.length > desc_truncate_length ? desc[0...desc_truncate_length] + '…' : nil %>
+
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="<%= cocktail.pic %>" alt="<%= cocktail.name %>">
           <div class="caption">
             <h3><%= cocktail.name %></h3>
 
-            <p>
-
-              <%= cocktail.description %>
-            </p>
-
+            <% if desc_truncated.nil? %>
+              <p><%= cocktail.description %></p>
+            <% else %>
+              <p title='<%= cocktail.description %>'>
+                <%= desc_truncated %>
+              </p>
+            <% end %>
 
             <p>
               <%= link_to 'View', cocktail_path(cocktail), class: 'btn btn-primary' %>
@@ -33,7 +39,4 @@
 </div>
 
 <br>
-
-
-<%= link_to "Add a cocktail", new_cocktail_path, class: "btn btn-primary" %>
 

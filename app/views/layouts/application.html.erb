@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>RailsMisterCocktail</title>
@@ -13,7 +13,69 @@
 
   <body>
     <%= yield %>
-    <%= javascript_include_tag "application" %> <!-- from app/assets/javascripts/application.js -->
-    <%= javascript_pack_tag "application" %>    <!-- from app/javascript/packs/application.js -->
+    <%= javascript_include_tag "application" %>
+    <%= javascript_pack_tag "application" %>
+  </body>
+</html>
+
+
+
+ -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta charset="UTF-8">
+    </head>
+    <title>Rails Yelp MVP</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style='margin: 0px 0 50px 0'>
+
+    <header>
+      <nav id='top-nav'>
+        <ul class="nav nav-tabs">
+
+          <%
+            tabs = [
+              { txt: 'Home', path: :root, alt_path: '/cocktails' },
+              { txt: 'Add', path: '/cocktails/new' },
+            ]
+          %>
+
+          <% tabs.each do |tab| %>
+
+            <% paths = [tab[:path]] %>
+            <% paths << tab[:alt_path] if tab[:alt_path] %>
+
+            <li role="presentation" class='<%= paths.any? { |el| current_page?(el) } ? "active" : "" %>'>
+              <%= link_to tab[:txt], tab[:path] %>
+            </li>
+
+          <% end %>
+        </ul>
+      </nav>
+
+      <!-- <nav></nav> -->
+    </header>
+
+    <main class='wrapper'>
+
+      <div class='container'>
+        <%= yield %>
+      </div>
+
+    </main>
+
+    <footer></footer>
   </body>
 </html>
