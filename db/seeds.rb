@@ -28,7 +28,7 @@ end
 puts "Added #{Ingredient.count} ingredients."
 
 # Seeding cocktails
-Cocktail.create(name: "Godfather")
+Cocktail.create(name: "GODFATHER")
 Cocktail.create(name: "TI' PUNCH")
 Cocktail.create(name: "ROB BOY")
 Cocktail.create(name: "HANKY PANKY")
