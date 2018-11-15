@@ -1,0 +1,10 @@
+<h1>EDIT DOSE PAGE</h1>
+
+<h3>Enter information in the form below:</h3>
+
+<%= simple_form_for([@cocktail, @dose]) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+<% end %>

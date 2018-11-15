@@ -9,6 +9,8 @@ class CocktailsController < ApplicationController
 
   def new
     @cocktail = Cocktail.new
+
+
   end
 
   def create
