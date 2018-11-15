@@ -1,2 +1,21 @@
 // Import page-specific CSS files here.
 @import "home";
+
+.row {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.row>* {
+  flex: 0 0 1fr;
+}
+
+.row .thumbnail {
+  height: calc(100% - 20px);
+}
+
+.ib-icon {
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+}
