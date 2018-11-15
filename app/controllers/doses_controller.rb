@@ -1,10 +1,13 @@
-class CocktailsController < ApplicationController
+class DosesController < ApplicationController
   def create
+    @
   end
 
   def update
+    @
   end
 
   def destroy
+    @
   end
 end
