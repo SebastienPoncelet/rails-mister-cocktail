@@ -5,6 +5,6 @@ class Dose < ApplicationRecord
   validates :cocktail, presence: true
   validates :ingredient, presence: true
   validates :qty, presence: true
-  validates :qty_unit, presence: true,
-  validates_inclusion_of :qty_unit, in: %w[ml unit g oz]
+  validates :qty_unit, presence: true
+  validates_inclusion_of :qty_unit, in: %w[unit ml cl g oz]
 end
