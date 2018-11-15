@@ -44,6 +44,13 @@ class DosesController < ApplicationController
   def dose_params
     params.require(:dose).permit(:name)
   end
+
+  private
+
+  def dose_params
+    params.require(:dose).permit(:qty, :qty_unit, :cocktail, :ingredient)
+
+  end
 end
 
 
