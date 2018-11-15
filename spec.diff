@@ -10,6 +10,10 @@
   * references an ingredient
 - * has a description.
 
+# rails g model Cocktail name description:text
+# rails g model Ingredient name
+# rails g model Dose qty:integer qty_unit cocktail:references ingredient:references
+
 ## Validation
 
 * A cocktail must have a unique name.
