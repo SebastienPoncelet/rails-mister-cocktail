@@ -26,3 +26,17 @@ drinks.each do |ingredient|
 end
 
 puts "Added #{Ingredient.count} ingredients."
+
+# Seeding cocktails
+Cocktail.create(name: "Godfather")
+Cocktail.create(name: "TI' PUNCH")
+Cocktail.create(name: "ROB BOY")
+Cocktail.create(name: "HANKY PANKY")
+Cocktail.create(name: "OLD CUBAN")
+Cocktail.create(name: "CHAMPAGNE COCKTAIL")
+Cocktail.create(name: "JUNGLE BIRD")
+Cocktail.create(name: "WHITE RUSSIAN")
+Cocktail.create(name: "VESPER")
+Cocktail.create(name: "AMARETTO SOUR")
+
+puts "Added #{Cocktail.count} cocktails."
