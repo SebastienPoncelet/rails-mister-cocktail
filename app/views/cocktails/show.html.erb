@@ -4,8 +4,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
 
     <div class="thumbnail">
-      <img src="<%= @cocktail.pic %>" alt="<%= @cocktail.name %>">
-
+      <%= render 'cocktail_img', cocktail: @cocktail %>
     </div>
 
   </div>
@@ -19,7 +18,16 @@
         <% @cocktail.doses.each do |dose|%>
           <li>
             <%= Ingredient.find(dose.ingredient_id).name %>
-            (<%= dose.qty_raw.strip %>)
+            (<%= dose.qty_raw.nil? ? "#{dose.qty} #{dose.qty_unit}" : dose.qty_raw.strip %>)
+
+            <%= link_to cocktail_dose_path(dose), method: :delete, class: 'edit' do %>
+              <%= fa_icon "pencil", class: 'ib-icon' %>
+            <% end %>
+
+            <%= link_to cocktail_dose_path(dose), method: :delete, data: { confirm: "Are you sure you want to delete #{dose.ingredient.name} from #{@cocktail.name}?" }, class: 'delete' do %>
+              <%= fa_icon "trash", class: 'ib-icon' %>
+            <% end %>
+
           </li>
         <% end %>
       </ul>
@@ -28,24 +36,26 @@
 
     <hr>
 
-    <h3>Preparation</h3>
+    <% if @cocktail.description %>
+      <h3>Preparation</h3>
 
-    <% steps = @cocktail.description
-      .split(/\d[.)]/)
-      .reject { |el| el.empty? }
-      .map { |el| el.strip } %>
+      <% steps = @cocktail.description
+        .split(/\d[.)]/)
+        .reject { |el| el.empty? }
+        .map { |el| el.strip } %>
 
-    <p>
-      <% if steps.length < 2 %>
-        <%= @cocktail.description %>
-      <% else %>
-        <ol>
-          <% steps.each do |step| %>
-            <li><%= step %></li>
-          <% end %>
-        </ol>
-      <% end %>
-    </p>
+      <p>
+        <% if steps.length < 2 || @cocktail.description.nil? %>
+          <%= @cocktail.description %>
+        <% else %>
+          <ol>
+            <% steps.each do |step| %>
+              <li><%= step %></li>
+            <% end %>
+          </ol>
+        <% end %>
+      </p>
+    <% end %>
 
     <%= link_to 'Edit', edit_cocktail_path(@cocktail), class: 'btn btn-primary' %>
     <%= link_to 'Delete', cocktail_path(@cocktail.id), method: :delete, data: { confirm: "Are you sure you want to delete #{@cocktail.name}?" }, class: 'btn btn-danger' %>
@@ -58,4 +68,3 @@
   </div>
 
 </div>
-

@@ -79,3 +79,47 @@
     z-index: 10000000000000000000000000000000000000000000000000000 !important;
   }
 }
+
+.ib-icon {
+  display: inline-block;
+  // width: 1em;
+  text-align: center;
+  opacity: 0;
+}
+
+a {
+  &.edit {
+    color: $brand-primary;
+    &:hover {
+      color: darken($brand-primary, 10);
+    }
+    margin-left: 15px;
+  }
+
+  &.delete {
+    color: $brand-danger;
+    &:hover {
+      color: darken($brand-danger, 20);
+    }
+    margin-left: 5px;
+  }
+
+  &.edit, &.delete {
+    &:hover {
+      text-decoration: inherit;
+    }
+  }
+}
+
+
+
+
+li:hover .ib-icon {
+  opacity: 1;
+}
+
+form {
+  input[type='text'], textarea {
+    width: 100%;
+  }
+}
