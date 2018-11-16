@@ -5,16 +5,16 @@ class CocktailsController < ApplicationController
     @page_idx = params[:page] ? params[:page].to_i - 1 : 0
     @page_human = @page_idx + 1
 
-    if params[:q]
-      @cocktails = Cocktail.search do
-        fulltext params[:q]
-        paginate :page => @page_idx, :per_page => per_page
-      end .results
+    # if params[:q]
+    #   @cocktails = Cocktail.search do
+    #     fulltext params[:q]
+    #     paginate :page => @page_idx, :per_page => per_page
+    #   end .results
 
-      @max_page_idx = @cocktails.total_pages - 1
-    else
+    #   @max_page_idx = @cocktails.total_pages - 1
+    # else
       @cocktails = Cocktail.limit(per_page).offset(per_page * @page_idx)
-    end
+    # end
   end
 
   def show
