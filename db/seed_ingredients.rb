@@ -1,4 +1,5 @@
 puts 'deleting ingredients...'
+Dose.delete_all
 Ingredient.delete_all
 
 ingredient_serialized = File.read(File.join(File.dirname(__FILE__), 'seed_data/ingredients.json'))

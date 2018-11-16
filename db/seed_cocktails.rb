@@ -53,3 +53,11 @@ drinks.each do |drink_outer|
 end
 
 puts "Added #{Cocktail.count} cocktails."
+
+
+url = 'Clt6YuRWQAAdWBm.jpg'
+cocktail = Cocktail.new(name: 'martini glass')
+cocktail.remote_photo_url = url
+cocktail.save
+
+
