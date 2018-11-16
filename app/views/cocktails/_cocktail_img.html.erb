@@ -1,0 +1,9 @@
+<% if cocktail.photo %>
+<!-- cloudinary -->
+  <%= cl_image_tag cocktail.photo, alt: cocktail.name, height: 700, width: 700, crop: :fill %>
+<% elsif cocktail.pic %>
+<!-- external url -->
+  <%= image_tag cocktail.pic, alt: cocktail.name, height: 700, width: 700, crop: :fill %>
+<% else %>
+  <%= image_tag "no_img_placeholder.png", alt: "", height: 700, width: 700, crop: :fill %>
+<% end %>

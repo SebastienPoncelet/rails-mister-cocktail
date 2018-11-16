@@ -14,7 +14,7 @@
 
         <%= link_to cocktail_path(cocktail), class: 'th-link' do %>
           <div class="thumbnail homepage-thumb">
-            <img src="<%= cocktail.pic %>" alt="<%= cocktail.name %>">
+            <%= render 'cocktail_img', cocktail: cocktail %>
             <div class="caption">
               <h3><%= cocktail.name %></h3>
 
@@ -25,12 +25,6 @@
                   <%= desc_truncated %>
                 </p>
               <% end %>
-
-              <p>
-                <%= link_to 'Edit', edit_cocktail_path(cocktail), class: 'btn btn-primary' %>
-                <%= link_to 'Delete', cocktail_path(cocktail.id), method: :delete, data: { confirm: "Are you sure you want to delete #{cocktail.name}?" }, class: 'btn btn-danger' %>
-
-              </p>
             </div>
           </div>
         <% end %>
