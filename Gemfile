@@ -39,6 +39,10 @@ gem 'simple_form'
 
 # Gem to protect our Cloudinary secret key to avoid showing it on GitHub.
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'cloudinary'
+
+# Gem for Cloudinary
+gem 'carrierwave', '~> 1.2'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
