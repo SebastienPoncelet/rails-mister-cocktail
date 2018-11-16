@@ -20,11 +20,11 @@
             <%= Ingredient.find(dose.ingredient_id).name %>
             (<%= dose.qty_raw.nil? ? "#{dose.qty} #{dose.qty_unit}" : dose.qty_raw.strip %>)
 
-            <%= link_to cocktail_dose_path(dose), method: :delete, class: 'edit' do %>
+            <%= link_to edit_cocktail_dose_path(@cocktail, dose), class: 'edit' do %>
               <%= fa_icon "pencil", class: 'ib-icon' %>
             <% end %>
 
-            <%= link_to cocktail_dose_path(dose), method: :delete, data: { confirm: "Are you sure you want to delete #{dose.ingredient.name} from #{@cocktail.name}?" }, class: 'delete' do %>
+            <%= link_to cocktail_dose_path(@cocktail, dose), method: :delete, data: { confirm: "Are you sure you want to delete #{dose.ingredient.name} from #{@cocktail.name}?" }, class: 'delete' do %>
               <%= fa_icon "trash", class: 'ib-icon' %>
             <% end %>
 

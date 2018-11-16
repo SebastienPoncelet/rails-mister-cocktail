@@ -23,11 +23,17 @@ class DosesController < ApplicationController
   def update
     @cocktail = Cocktail.find(params[:cocktail_id])
     @dose = Dose.find(params[:id])
+
+    @dose.update(dose_params)
+
+    # raise
+
+    redirect_to cocktail_path(@cocktail)
   end
 
   def destroy
-    @cocktail = Cocktail.find(params[:id])
-    @dose = Dose.find(params[:cocktail_id])
+    @cocktail = Cocktail.find(params[:cocktail_id])
+    @dose = Dose.find(params[:id])
     # dose_ids = @cocktail.doses.ids
     # dose = Dose.where(cocktail_id: params[:cocktail_id])
     @dose.destroy
@@ -43,12 +49,12 @@ class DosesController < ApplicationController
 
   private
 
-  def dose_params
-    params.require(:dose).permit(:name)
-  end
+  # def dose_params
+  #   params.require(:dose).permit(:name)
+  # end
 
   def dose_params
-    params.require(:dose).permit(:qty, :qty_unit, :cocktail, :ingredient)
+    params.require(:dose).permit(:ingredient, :qty_raw)
   end
 end
 # cocktail_doses POST   /cocktails/:cocktail_id/doses(.:format)       doses#create

@@ -1,0 +1,11 @@
+<%= simple_form_for([dose.cocktail, dose]) do |f| %>
+  <%= f.association :ingredient %>
+  <br>
+  <br>
+  <%= f.label :qty_raw, 'Quantity' %>
+  <br>
+  <%= f.text_field :qty_raw %>
+  <br>
+  <br>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
