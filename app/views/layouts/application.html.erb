@@ -31,7 +31,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta charset="UTF-8">
     </head>
-    <title>Rails Yelp MVP</title>
+    <title>Mix-a-Lot</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -39,35 +39,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <%= render 'navbar' %>
+
   <body style='margin: 0px 0 50px 0'>
-
-    <header>
-      <nav id='top-nav'>
-        <ul class="nav nav-tabs">
-
-          <%
-            tabs = [
-              { txt: 'Home', path: :root, alt_path: '/cocktails' },
-              { txt: 'Add', path: '/cocktails/new' },
-            ]
-          %>
-
-          <% tabs.each do |tab| %>
-
-            <% paths = [tab[:path]] %>
-            <% paths << tab[:alt_path] if tab[:alt_path] %>
-
-            <li role="presentation" class='<%= paths.any? { |el| current_page?(el) } ? "active" : "" %>'>
-              <%= link_to tab[:txt], tab[:path] %>
-            </li>
-
-          <% end %>
-        </ul>
-      </nav>
-
-      <!-- <nav></nav> -->
-    </header>
-
     <main class='wrapper'>
 
       <div class='container'>

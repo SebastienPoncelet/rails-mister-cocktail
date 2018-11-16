@@ -1,0 +1,38 @@
+<header>
+  <div id='logo-bar'>
+    <div class='logo-bar-inner'>
+      <div id="logo">
+
+        <div class="logo-shadow"></div>
+
+      </div>
+      <div class="heading">
+        <h1>Mix-a-Lot</h1>
+        <p><em>We cannot lie — our cocktail recipes are the best!</em></p>
+      </div>
+    </div>
+  </div>
+
+  <nav id='top-nav'>
+    <ul class="nav nav-tabs">
+
+      <%
+        tabs = [
+          { txt: 'Home', path: :root, alt_path: '/cocktails' },
+          { txt: 'Add', path: '/cocktails/new' },
+        ]
+      %>
+
+      <% tabs.each do |tab| %>
+
+        <% paths = [tab[:path]] %>
+        <% paths << tab[:alt_path] if tab[:alt_path] %>
+
+        <li role="presentation" class='<%= paths.any? { |el| current_page?(el) } ? "active" : "" %>'>
+          <%= link_to tab[:txt], tab[:path] %>
+        </li>
+
+      <% end %>
+    </ul>
+  </nav>
+</header>

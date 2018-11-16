@@ -1,4 +1,4 @@
-<h1>Cocktails</h1>
+<h2>Cocktails</h2>
 
 <p id="notice"><%= notice %></p>
 
@@ -6,32 +6,34 @@
 
   <% @cocktails.each do |cocktail| %>
 
-      <% desc = cocktail.description %>
+      <% desc = cocktail.description || '' %>
       <% desc_truncate_length = 70 %>
       <% desc_truncated = desc.length > desc_truncate_length ? desc[0...desc_truncate_length] + '…' : nil %>
 
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="<%= cocktail.pic %>" alt="<%= cocktail.name %>">
-          <div class="caption">
-            <h3><%= cocktail.name %></h3>
+      <div class="col-sm-6 col-md-4 th-parent">
 
-            <% if desc_truncated.nil? %>
-              <p><%= cocktail.description %></p>
-            <% else %>
-              <p title='<%= cocktail.description %>'>
-                <%= desc_truncated %>
+        <%= link_to cocktail_path(cocktail), class: 'th-link' do %>
+          <div class="thumbnail">
+            <img src="<%= cocktail.pic %>" alt="<%= cocktail.name %>">
+            <div class="caption">
+              <h3><%= cocktail.name %></h3>
+
+              <% if desc_truncated.nil? %>
+                <p><%= cocktail.description %></p>
+              <% else %>
+                <p title='<%= cocktail.description %>'>
+                  <%= desc_truncated %>
+                </p>
+              <% end %>
+
+              <p>
+                <%= link_to 'Edit', edit_cocktail_path(cocktail), class: 'btn btn-primary' %>
+                <%= link_to 'Delete', cocktail_path(cocktail.id), method: :delete, data: { confirm: "Are you sure you want to delete #{cocktail.name}?" }, class: 'btn btn-danger' %>
+
               </p>
-            <% end %>
-
-            <p>
-              <%= link_to 'View', cocktail_path(cocktail), class: 'btn btn-primary' %>
-              <%= link_to 'Edit', edit_cocktail_path(cocktail), class: 'btn btn-primary' %>
-              <%= link_to 'Delete', cocktail_path(cocktail.id), method: :delete, data: { confirm: "Are you sure you want to delete #{cocktail.name}?" }, class: 'btn btn-danger' %>
-
-            </p>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
 
   <% end %>
@@ -40,35 +42,41 @@
 
 <br>
 
-<% rng = ((@page_idx - 1)..(@page_idx + 1)).to_a.reject { |n| n < 0 || n >= @max_page_idx } %>
+<% pgs_below_above = 2 %>
 
-<% prev_exists = @page_idx >= 0 %>
-<% next_exists = @page_idx <= @max_page_idx %>
+<% min = @page_idx - pgs_below_above %>
+<% max = @page_idx + pgs_below_above %>
 
-<% prev_classes = %w[page-link] %>
-<% next_classes = %w[page-link] %>
+<% rng = (min..max) %>
 
-<% prev_classes << 'disabled' if !prev_exists %>
-<% next_classes << 'disabled' if !next_exists %>
+<% if min < 0 %>
+  <% min = 0 %>
+  <% max = [min + (pgs_below_above) * 2, @max_page_idx].min %>
+<% elsif max > @max_page_idx %>
+  <% max = @max_page_idx %>
+  <% min = [max - (pgs_below_above) * 2, 0].max %>
+<% end %>
 
-<% prev_classes_joined = prev_classes.join(' ') %>
-<% next_classes_joined = next_classes.join(' ') %>
+<% rng = min..max %>
+
+<% prev_exists = @page_idx > 0 %>
+<% next_exists = @page_idx <= @max_page_idx - 1 %>
 
 <nav aria-label="pagination">
   <ul class="pagination">
 
-    <li>
-      <%= link_to '«', cocktails_path(page: + 1), class: prev_classes_joined %>
+    <li class='<%= prev_exists ? '' : 'disabled'  %>'>
+      <%= link_to '«', cocktails_path(page: 1), class: 'page-link' %>
     </li>
 
     <% rng.each do |n| %>
-      <li>
+      <li class='<%= n == @page_idx ? 'active' : ''  %>'>
         <%= link_to "#{n + 1}", cocktails_path(page: n + 1), class: 'page-link' %>
       </li>
     <% end %>
 
-    <li>
-      <%= link_to '»', cocktails_path(page: @max_page_idx), class: next_classes_joined %>
+    <li class='<%= next_exists ? '' : 'disabled'  %>'>
+      <%= link_to '»', cocktails_path(page: @max_page_idx + 1), class: 'page-link' %>
     </li>
 
 
