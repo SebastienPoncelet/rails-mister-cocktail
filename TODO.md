@@ -13,8 +13,8 @@
 <!-- * style show page -->
 <!-- * default cocktail pic -->
 <!-- * fix controller for new/edit doses -->
-* fix img display on heroku
 
+* fix img display on heroku
 * idx page search?
 
 ## be

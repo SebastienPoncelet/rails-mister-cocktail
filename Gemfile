@@ -41,7 +41,7 @@ gem 'simple_form'
 
 # Gem to protect our Cloudinary secret key to avoid showing it on GitHub.
 gem 'dotenv-rails', groups: [:development, :test]
-gem 'cloudinary'
+gem 'cloudinary', '1.9.0'
 
 # Gem for Cloudinary
 gem 'carrierwave', '~> 1.2'
@@ -74,3 +74,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rspec-rails', group: [ :test ]
 gem 'rails-controller-testing', group: [ :test ]
+
+gem 'sunspot_rails'
+gem 'sunspot_solr'
