@@ -26,8 +26,6 @@ class DosesController < ApplicationController
 
     @dose.update(dose_params)
 
-    # raise
-
     redirect_to cocktail_path(@cocktail)
   end
 
@@ -49,14 +47,11 @@ class DosesController < ApplicationController
 
   private
 
-  # def dose_params
-  #   params.require(:dose).permit(:name)
-  # end
-
   def dose_params
-    params.require(:dose).permit(:ingredient, :qty_raw)
+    params.require(:dose).permit(:ingredient_id, :qty_raw)
   end
 end
+
 # cocktail_doses POST   /cocktails/:cocktail_id/doses(.:format)       doses#create
 #  cocktail_dose PATCH  /cocktails/:cocktail_id/doses/:id(.:format)   doses#update
 #                PUT    /cocktails/:cocktail_id/doses/:id(.:format)   doses#update
