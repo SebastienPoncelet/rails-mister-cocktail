@@ -13,8 +13,6 @@ class CocktailsController < ApplicationController
 
   def new
     @cocktail = Cocktail.new
-
-
   end
 
   def create
@@ -32,7 +30,9 @@ class CocktailsController < ApplicationController
 
   def update
     @cocktail = Cocktail.find(cocktail_id_params)
-    @cocktail[:name] = cocktail_params["name"]
+    # @cocktail[:name] = cocktail_params["name"]
+
+    Cocktail.update(cocktail_params)
 
     # @cocktail.update(cocktail_params["name"])
     if @cocktail.save
@@ -62,7 +62,7 @@ class CocktailsController < ApplicationController
 
   def cocktail_params
     # NEED TO ADD OTHER KEYS LINKED TO DOSES AND INGREDIENTS LATER ON - SPO - 15/11/2018 - 15h02
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :description, :photo, :pic)
   end
 
   def cocktail_id_params
