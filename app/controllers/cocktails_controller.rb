@@ -29,13 +29,8 @@ class CocktailsController < ApplicationController
   end
 
   def update
-    @cocktail = Cocktail.find(cocktail_id_params)
-    # @cocktail[:name] = cocktail_params["name"]
-
-    Cocktail.update(cocktail_params)
-
-    # @cocktail.update(cocktail_params["name"])
-    if @cocktail.save
+    @cocktail = Cocktail.find(params[:id])
+    if @cocktail.update(cocktail_params)
       redirect_to cocktail_path(@cocktail)
     else
       render :new # keeps user input to avoid writing everything again when error
@@ -62,7 +57,7 @@ class CocktailsController < ApplicationController
 
   def cocktail_params
     # NEED TO ADD OTHER KEYS LINKED TO DOSES AND INGREDIENTS LATER ON - SPO - 15/11/2018 - 15h02
-    params.require(:cocktail).permit(:name, :description, :photo, :pic)
+    params.require(:cocktail).permit(:name, :description, :photo, :photo_cache, :pic)
   end
 
   def cocktail_id_params
