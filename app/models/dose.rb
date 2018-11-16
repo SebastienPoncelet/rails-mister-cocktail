@@ -7,5 +7,5 @@ class Dose < ApplicationRecord
   # validates :qty, presence: true
   # validates :qty_unit, presence: true
   validates :qty_raw, presence: true
-  validates_inclusion_of :qty_unit, in: %w[unit ml cl g oz]
+  # validates_inclusion_of :qty_unit, in: %w[unit ml cl g oz]
 end

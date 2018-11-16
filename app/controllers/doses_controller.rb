@@ -7,10 +7,11 @@ class DosesController < ApplicationController
   def create
     @cocktail = Cocktail.find(params[:cocktail_id])
     ingredient = Ingredient.find(params[:dose][:ingredient_id])
-    qty = params[:dose][:qty].to_i
-    qty_unit = params[:dose][:qty_unit]
 
-    Dose.create!(ingredient: ingredient, cocktail: @cocktail, qty: qty, qty_unit: qty_unit)
+    pars = dose_params
+    pars[:cocktail] = @cocktail
+
+    Dose.create!(pars)
     # TODO: implement correct logic for validation/permission error handling
 
     redirect_to cocktail_path(@cocktail)
