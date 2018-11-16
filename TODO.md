@@ -2,10 +2,11 @@
 
 ## fe
 
+* improve navbar styling
 * condense new/edit cocktail pgs into one
 * edit/delete btns => show cocktail page
 * js && rb for add ingredient fields on new/edit cocktail pgs
-* nav => partial
+<!-- * nav => partial -->
 * style show page
 * style new/edit cocktail pg
 * default cocktail pic

@@ -61,11 +61,11 @@
 @media only screen and (min-width: 768px) {
 
 
-  .thumbnail {
+  .homepage-thumb {
     transition: all 1s ease-in-out;
   }
 
-  .thumbnail:hover {
+  .homepage-thumb:hover {
     transform: scale(1.1);
     box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
   }

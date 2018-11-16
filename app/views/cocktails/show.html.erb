@@ -1,53 +1,56 @@
-<h1>COCKTAIL SHOW PAGE</h1>
+<h2><%= @cocktail.name %></h2>
 
-<h3>Cocktail details below:</h3>
+<div class='row'>
+  <div class="col-xs-12 col-sm-6 col-md-4">
 
-<table>
-  <tbody>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Ingredients</th>
-      <th>Dose</th>
-    </tr>
+    <div class="thumbnail">
+      <img src="<%= @cocktail.pic %>" alt="<%= @cocktail.name %>">
 
-    <tr>
-      <td><%= @cocktail.id%></td>
-      <td><%= @cocktail.name%></td>
-      <% @cocktail.doses.each do |dose|%>
-      <% @dose = dose %>
-      <td>
-        <ul>
-          <li><%= Ingredient.find(dose.ingredient_id).name %></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><%= dose.qty %></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><%= dose.qty_unit %></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><%= link_to "Delete", cocktail_dose_path(@dose), method: :delete %></li>
-        </ul>
-      </td>
+    </div>
 
+  </div>
 
+  <div class="col-xs-12 col-sm-6 col-md-8">
+
+    <h3>Ingredients</h3>
+
+    <p>
+      <ul>
+        <% @cocktail.doses.each do |dose|%>
+          <li>
+            <%= Ingredient.find(dose.ingredient_id).name %>
+            (<%= dose.qty_raw.strip %>)
+          </li>
         <% end %>
-    </tr>
-  </tbody>
-</table>
+      </ul>
+      <%= link_to "Add ingredient", new_cocktail_dose_path(@cocktail), class: "btn" %>
+    </p>
 
-<p></p>
-<p></p>
-<p></p>
-<p></p>
+    <hr>
 
-<%= link_to "ADD DOSE", new_cocktail_dose_path(@cocktail), class: "btn" %>
-<%= link_to "Cocktails list", cocktails_path, class: "btn btn-primary" %>
+    <h3>Preparation</h3>
+
+    <% steps = @cocktail.description
+      .split(/\d[.)]/)
+      .reject { |el| el.empty? }
+      .map { |el| el.strip } %>
+
+    <p>
+      <% if steps.length < 2 %>
+        <%= @cocktail.description %>
+      <% else %>
+        <ol>
+          <% steps.each do |step| %>
+            <li><%= step %></li>
+          <% end %>
+        </ol>
+      <% end %>
+      </p>
+  </div>
+
+  <div class="col-xs-12" style='margin-top: 25px'>
+    <%= link_to "Back to cocktails", cocktails_path, class: "btn btn-primary" %>
+  </div>
+
+</div>
 
