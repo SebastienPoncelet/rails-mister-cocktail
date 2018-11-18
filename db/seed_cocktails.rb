@@ -17,7 +17,7 @@ data = JSON.parse(cocktails_serialized)
 
 drinks = data
 
-puts 'creating cocktails...'
+puts 'creating cocktails and doses...'
 drinks.each do |drink_outer|
 
 

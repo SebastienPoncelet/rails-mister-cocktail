@@ -75,3 +75,43 @@ header {
   box-shadow: 100px 100px 35px rgba(0, 0, 0, 0.5);
   transform: translate(-100px, -10px);
 }
+
+.nav-list {
+  display: flex;
+  align-items: baseline
+}
+
+.search-outer {
+  display: flex !important;
+  align-items: center;
+  margin: 0 10px 0 auto;
+}
+
+.search-form {
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  // width: 8em;
+
+  input {
+
+    &[type='search'], &[type='text'], &[type='submit'] {
+      display: inline-block;
+      // height: 1.5em;
+    }
+
+    &[type='search'], &[type='text'] {
+      flex: 1 1 8em;
+      margin-right: 0.5em;
+    }
+
+    &[type='submit'] {
+      flex: 0 0 auto;
+    }
+
+  }
+}
+

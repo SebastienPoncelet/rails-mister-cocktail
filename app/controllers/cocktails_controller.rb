@@ -1,20 +1,13 @@
 class CocktailsController < ApplicationController
   def index
     per_page = 12
-    @max_page_idx = ((Cocktail.count - 1).to_f / per_page).floor
     @page_idx = params[:page] ? params[:page].to_i - 1 : 0
     @page_human = @page_idx + 1
 
-    # if params[:q]
-    #   @cocktails = Cocktail.search do
-    #     fulltext params[:q]
-    #     paginate :page => @page_idx, :per_page => per_page
-    #   end .results
+    results = params[:q] ? Cocktail.search(:name, params[:q]) : Cocktail.all
 
-    #   @max_page_idx = @cocktails.total_pages - 1
-    # else
-      @cocktails = Cocktail.limit(per_page).offset(per_page * @page_idx)
-    # end
+    @cocktails = results.limit(per_page).offset(per_page * @page_idx)
+    @max_page_idx = ((results.count - 1).to_f / per_page).floor
   end
 
   def show
@@ -63,6 +56,17 @@ class CocktailsController < ApplicationController
     redirect_to cocktails_path
   end
 
+  def search
+    # params[:q] = 'a'
+    redirect_to cocktails_path(q: params[:q])
+  end
+
+  def random
+    offset = rand(Cocktail.count)
+    @cocktail = Cocktail.offset(offset).first
+    redirect_to cocktail_path(@cocktail)
+  end
+
   private
 
   def cocktail_params
@@ -73,6 +77,10 @@ class CocktailsController < ApplicationController
   def cocktail_id_params
     # NEED TO ADD OTHER KEYS LINKED TO DOSES AND INGREDIENTS LATER ON - SPO - 15/11/2018 - 15h02
     params.require(:id).to_i
+  end
+
+  def search_params
+    params.require(:q)
   end
 end
 

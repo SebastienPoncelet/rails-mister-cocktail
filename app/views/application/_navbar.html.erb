@@ -14,25 +14,36 @@
   </div>
 
   <nav id='top-nav'>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs nav-list">
+      <%
+        is_homepage = %i[root cocktails].any? { |el| current_page? el } && (!params[:q] || params[:q].empty?)
+      %>
 
       <%
         tabs = [
-          { txt: 'Home', path: :root, alt_path: '/cocktails' },
-          { txt: 'New', path: '/cocktails/new' },
+          { txt: 'Home', path: :root, alt_path: :cocktails, active: is_homepage },
+          { txt: 'Create', path: :new_cocktail, active: current_page?(:new_cocktail) },
+          { txt: 'Random', path: :random_cocktail, method: :post, active: false, classes: ['hidden-xs'] }
         ]
       %>
 
       <% tabs.each do |tab| %>
 
-        <% paths = [tab[:path]] %>
-        <% paths << tab[:alt_path] if tab[:alt_path] %>
+        <%
+          classes = []
+          classes << 'active' if tab[:active]
+          classes += (tab[:classes] || [])
+        %>
 
-        <li role="presentation" class='<%= paths.any? { |el| current_page?(el) } ? "active" : "" %>'>
-          <%= link_to tab[:txt], tab[:path] %>
+        <li role="presentation" class='<%= classes.join(' ') %>'>
+          <%= link_to tab[:txt], tab[:path], method: tab[:method] || :get %>
         </li>
 
       <% end %>
+
+      <li role="presentation" class='search-outer'>
+        <%= render 'search_form' %>
+      </li>
     </ul>
   </nav>
 </header>
