@@ -110,9 +110,6 @@ a {
   }
 }
 
-
-
-
 li:hover .ib-icon {
   opacity: 1;
 }
@@ -121,4 +118,18 @@ form {
   input[type='text'], textarea {
     width: 100%;
   }
+}
+
+.link-nodecorate {
+  color: inherit;
+
+  &:hover, &:active {
+    text-decoration: inherit;
+    color: inherit;
+  }
+}
+
+.no-results-msg {
+  color: #888;
+  font-style: italic;
 }

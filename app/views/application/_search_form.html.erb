@@ -1,4 +1,4 @@
 <%= form_tag(:search_cocktail, class: 'search-form', method: :post) do %>
-  <%= text_field_tag :q, params[:q] || '', placeholder: "Search", class: "" %>
+  <%= text_field_tag :q, params[:q] || '', placeholder: "Search cocktails", class: "" %>
   <%= submit_tag "Go", class: "" %>
 <% end %>

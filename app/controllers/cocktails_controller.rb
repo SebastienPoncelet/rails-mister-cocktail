@@ -6,7 +6,7 @@ class CocktailsController < ApplicationController
 
     results = params[:q] ? Cocktail.search(:name, params[:q]) : Cocktail.all
 
-    @cocktails = results.limit(per_page).offset(per_page * @page_idx)
+    @cocktails = results.order(:name).limit(per_page).offset(per_page * @page_idx)
     @max_page_idx = ((results.count - 1).to_f / per_page).floor
   end
 
@@ -41,10 +41,6 @@ class CocktailsController < ApplicationController
   end
 
   def destroy
-    # @cocktail = Cocktail.find(params[:id])
-    # @cocktail.destroy
-    # redirect_to cocktails_path
-
     @cocktail = Cocktail.find(params[:id])
     dose_ids = @cocktail.doses.ids
     dose_ids.each do |id|
@@ -57,7 +53,6 @@ class CocktailsController < ApplicationController
   end
 
   def search
-    # params[:q] = 'a'
     redirect_to cocktails_path(q: params[:q])
   end
 
@@ -70,24 +65,6 @@ class CocktailsController < ApplicationController
   private
 
   def cocktail_params
-    # NEED TO ADD OTHER KEYS LINKED TO DOSES AND INGREDIENTS LATER ON - SPO - 15/11/2018 - 15h02
     params.require(:cocktail).permit(:name, :description, :photo, :photo_cache, :pic)
   end
-
-  def cocktail_id_params
-    # NEED TO ADD OTHER KEYS LINKED TO DOSES AND INGREDIENTS LATER ON - SPO - 15/11/2018 - 15h02
-    params.require(:id).to_i
-  end
-
-  def search_params
-    params.require(:q)
-  end
 end
-
-# params being sent when updating a cocktail
-# {"utf8"=>"✓",
-#  "_method"=>"patch",
-#  "authenticity_token"=>"/wnVQuMlozyHNJUZUqRN7nuPJf7Dm/FbbQIU7gI/htVSaH0ke8WQLsn6zINK0lwmvqB9ZvPXE0ze/O8tTFqcdA==",
-#  "cocktail"=>{"name"=>"RANDOM COCKTAIL 4"},
-#  "commit"=>"Update Cocktail",
-#  "id"=>"12"}

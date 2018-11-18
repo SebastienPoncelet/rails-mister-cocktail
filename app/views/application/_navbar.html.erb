@@ -1,15 +1,17 @@
 <header>
   <div id='logo-bar'>
     <div class='logo-bar-inner'>
-      <div id="logo">
-
-        <div class="logo-shadow"></div>
-
-      </div>
-      <div class="heading">
-        <h1>Mix-a-Lot</h1>
-        <p><em>We cannot lie — our cocktail recipes are the best!</em></p>
-      </div>
+      <%= link_to :root, class: "link-nodecorate" do %>
+        <div id="logo">
+          <div class="logo-shadow"></div>
+        </div>
+      <% end %>
+      <%= link_to :root, class: "link-nodecorate" do %>
+        <div class="heading">
+          <h1>Mix-a-Lot</h1>
+          <p><em>We cannot lie — our cocktail recipes are the best!</em></p>
+        </div>
+      <% end %>
     </div>
   </div>
 
@@ -21,9 +23,9 @@
 
       <%
         tabs = [
-          { txt: 'Home', path: :root, alt_path: :cocktails, active: is_homepage },
-          { txt: 'Create', path: :new_cocktail, active: current_page?(:new_cocktail) },
-          { txt: 'Random', path: :random_cocktail, method: :post, active: false, classes: ['hidden-xs'] }
+          { txt: 'Home', icon: 'home', path: :root, alt_path: :cocktails, active: is_homepage },
+          { txt: 'Create', icon: 'plus', path: :new_cocktail, active: current_page?(:new_cocktail) },
+          { txt: 'Random', path: :random_cocktail, method: :post, active: false }
         ]
       %>
 
@@ -35,9 +37,15 @@
           classes += (tab[:classes] || [])
         %>
 
-        <li role="presentation" class='<%= classes.join(' ') %>'>
-          <%= link_to tab[:txt], tab[:path], method: tab[:method] || :get %>
+        <li role="presentation" class="<%= classes.join(' ') %>">
+          <%= link_to tab[:txt], tab[:path], method: tab[:method] || :get, class: 'hidden-xs' %>
+          <% if tab[:icon] %>
+            <%= link_to tab[:path], class: 'visible-xs' do %>
+              <%= fa_icon tab[:icon] %>
+            <% end %>
+          <% end %>
         </li>
+
 
       <% end %>
 

@@ -13,16 +13,22 @@
 <!-- * style show page -->
 <!-- * default cocktail pic -->
 <!-- * fix controller for new/edit doses -->
+<!-- * idx page search -->
+* alignment for ingredient edit/delete icons
+<!-- * narrow screens - home/create => fa icons -->
+<!-- * "no results found" msg -->
+<!-- * logo => link -->
 
-* fix img display on heroku
-* idx page search?
 
 ## be
 
+<!-- * idx page search -->
 <!-- * user-added imgs -->
 * clean up data w.r.t. units
+* add ingredients dynamically in seed
 
 
 ## DEFER
 
+* fix app-local img display on heroku ??
 * js && rb for add ingredient fields on new/edit cocktail pgs
